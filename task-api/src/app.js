@@ -6,6 +6,16 @@ const app = express();
 app.use(express.json());
 app.use('/tasks', taskRoutes);
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Task Manager API is running',
+    endpoints: {
+      tasks: '/tasks',
+      stats: '/tasks/stats'
+    }
+  });
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Internal server error' });
